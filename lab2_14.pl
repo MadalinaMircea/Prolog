@@ -1,0 +1,29 @@
+longest([],[],[]).
+longest([],C,R):-
+    length(C,LC),
+    length(R,LR),
+    LC>LR,
+    R is C.
+longest([],C,R):-
+    length(C,LC),
+    length(R,LR),
+    LC=<LR.
+longest([H|T],C,R):-
+    mod(H,2)=:=0,
+    append(C,H,RC),
+    longest(T,RC,R).
+longest([H|T],C,R):-
+    mod(H,2)=\=0,
+    length(C,LC),
+    length(R,LR),
+    LC>LR,
+    longest(T,[],C).
+longest([H|T],C,R):-
+    mod(H,2)=\=0,
+    length(C,LC),
+    length(R,LR),
+    LC=<LR,
+    longest(T,[],R).
+
+longest(L,R):-
+    longest(L,[],R).

@@ -1,0 +1,29 @@
+%listMerge(L1-first list,L2-second list,Last-number,RL-resulted list)
+%listMerge flow model (i,i,o)
+listMerge([],[],_,[]).
+listMerge([],[H|T],Last,[H|RT]):-
+    H=\=Last,
+    listMerge([],T,H,RT).
+listMerge([],[Last|T],Last,R):-
+    listMerge([],T,Last,R).
+listMerge([H|T],[],Last,[H|RT]):-
+    H=\=Last,
+    listMerge(T,[],H,RT).
+listMerge([Last|T],[],Last,R):-
+    listMerge(T,[],Last,R).
+listMerge([H1|T1],[H2|T2],Last,[H1|T]):-
+    H1<H2,
+    H1=\=Last,
+    listMerge(T1,[H2|T2],H1,T).
+listMerge([H1|T1],[H2|T2],Last,[H2|T]):-
+    H1>=H2,
+    H2=\=Last,
+    listMerge([H1|T1],T2,H2,T).
+listMerge([H1|T1],L2,Last,RL):-
+    H1=:=Last,
+    listMerge(T1,L2,Last,RL).
+listMerge(L1,[H2|T2],Last,RL):-
+    H2=:=Last,
+    listMerge(L1,T2,Last,RL).
+listMerge(L1,L2,R):-
+    listMerge(L1,L2,-100000,R).
